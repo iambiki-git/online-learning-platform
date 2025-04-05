@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex h-screen bg-gray-50 py-12">
+  <!-- Chapters sidebar - Slimmer and more elegant -->
+  <div class="w-56 bg-white border-r border-gray-100 overflow-y-auto shadow-sm">
+    <div class="p-5 sticky top-0 bg-white z-10 border-b border-gray-100">
+      <h2 class="text-lg font-semibold text-gray-800">Python Fundamentals</h2>
+    </div>
+    <nav class="px-3 space-y-1">
+      <a href="#" class="flex items-center px-3 py-2.5 bg-blue-50 text-blue-600 rounded-lg group transition-all">
+        <span class="text-sm font-medium">1. Introduction to Python</span>
+        <span class="ml-auto w-2 h-2 bg-blue-500 rounded-full"></span>
+      </a>
+      <a href="#" class="flex items-center px-3 py-2.5 bg-blue-50 text-blue-600 rounded-lg group transition-all">
+        <span class="text-sm font-medium"></span>2. Variables & Data Types
+        <span class="ml-auto w-2 h-2 bg-blue-500 rounded-full"></span>
+      </a>
+      {% for i in "234567" %}
+      <a href="#" class="flex items-center px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg group transition-all">
+        {% comment %} <span class="text-sm font-medium">{{ i }}. {% cycle "Variables", "Control", "Functions", "Lists", "Dictionaries", "Files" %}</span> {% endcomment %}
+        {% comment %} <span class="ml-auto text-xs text-gray-400">{% cycle "12m", "18m", "22m", "15m", "20m", "25m" %}</span> {% endcomment %}
+      </a>
+      {% endfor %}
+    </nav>
+  </div>
+
+  <!-- Main content area - Better spacing and typography -->
+  <div class="flex-1 overflow-y-auto">
+    <div class="max-w-6xl mx-auto p-8 pb-16">
+      <!-- Current chapter header - More refined -->
+      <div class="mb-10">
+        <div class="flex items-center mb-3">
+          <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">Chapter 1</span>
+          <span class="mx-2 text-gray-400">•</span>
+          <span class="text-xs text-gray-500">15 min read</span>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">Introduction to Python</h1>
+        <div class="flex items-center text-sm text-gray-500">
+          <div class="flex items-center">
+            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>3/7 exercises completed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson content - Improved readability -->
+      <div class="prose prose-sm sm:prose max-w-none mb-12">
+        <h2 class="text-xl font-semibold text-gray-800 mb-5 pb-2 border-b border-gray-100">What is Python?</h2>
+        
+        <p class="mb-5 text-gray-700 leading-relaxed">Python is a high-level, interpreted programming language known for its simple syntax and readability. It supports multiple programming paradigms including procedural, object-oriented, and functional programming.</p>
+        
+        <div class="bg-gray-50 p-5 rounded-xl border border-gray-200 mb-7">
+          <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            Key Features
+          </h3>
+          <ul class="space-y-2.5 pl-1">
+            <li class="flex items-start">
+              <svg class="w-4 h-4 mt-0.5 mr-2 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-gray-700">Easy-to-learn syntax with clear readability</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 mt-0.5 mr-2 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-gray-700">Cross-platform compatibility</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 mt-0.5 mr-2 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-gray-700">Large standard library</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 mt-0.5 mr-2 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-gray-700">Dynamically typed with automatic memory management</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Code block with better styling -->
+        <div class="mt-8 mb-10">
+          <div class="flex items-center justify-between bg-gray-800 px-4 py-2 rounded-t-lg">
+            <span class="text-xs font-mono text-gray-300">example.py</span>
+            <button class="text-gray-400 hover:text-white">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+              </svg>
+            </button>
+          </div>
+          <pre class="bg-gray-900 p-4 rounded-b-lg overflow-x-auto"><code class="text-sm font-mono text-gray-300"># Simple Python program
+print("Hello, World!")
+
+def greet(name):
+    """Greets the user with their name"""
+    print(f"Hello, {name}")
+
+greet("Alice")</code></pre>
+        </div>
+      </div>
+
+      <!-- Navigation - More polished buttons -->
+      <div class="flex justify-between border-t border-gray-200 pt-10">
+        <button class="inline-flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Previous Lesson
+        </button>
+        
+        <a href="#" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all">
+          Next: Variables and Data Types
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

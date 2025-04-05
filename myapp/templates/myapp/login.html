@@ -17,43 +17,92 @@
         </div>
 
         <!-- Login Form -->
-        <form class="space-y-6">
+        <form class="space-y-6" method="POST">
+          {% csrf_token %}
+          
           <!-- Email Input -->
           <div class="relative">
-            <input id="login-email" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 peer" placeholder=" ">
-            <label for="login-email" class="absolute left-4 top-3 text-gray-500 text-sm transition-all duration-200 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:text-sm peer-focus:text-gray-900 peer-focus:-top-2 peer-focus:left-3 peer-focus:bg-white peer-focus:px-1">
-              Email address
-            </label>
-          </div>
-
-          <!-- Password Input -->
-          <div class="relative">
-            <input id="login-password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 peer" placeholder=" ">
-            <label for="login-password" class="absolute left-4 top-3 text-gray-500 text-sm transition-all duration-200 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:text-sm peer-focus:text-gray-900 peer-focus:-top-2 peer-focus:left-3 peer-focus:bg-white peer-focus:px-1">
-              Password
-            </label>
-          </div>
-
-          <!-- Remember Me & Forgot Password -->
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <input id="remember-me" type="checkbox" class="h-4 w-4 text-gray-900 focus:ring-gray-900 border-gray-300 rounded">
-              <label for="remember-me" class="ml-2 block text-sm text-gray-600">
-                Remember me
+              <input 
+                  id="login-email" 
+                  type="email" 
+                  name="email" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 peer" 
+                  placeholder=" "
+                  value="{{ form_data.email|default:'' }}"
+                  required
+              >
+              <label for="login-email" class="
+                                        absolute left-4 top-3 text-gray-500 text-sm transition-all duration-200 
+                                        peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
+                                        peer-focus:text-sm peer-focus:text-gray-600 
+                                        peer-focus:-top-2 peer-focus:left-3 
+                                        peer-focus:bg-white peer-focus:px-1
+                                        peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-3 
+                                        peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white 
+                                        peer-[:not(:placeholder-shown)]:px-1">
+                  Email address
               </label>
-            </div>
-            <div class="text-sm">
-              <a href="#" class="text-gray-900 font-medium hover:underline">
-                Forgot password?
-              </a>
-            </div>
           </div>
-
+      
+          <!-- Password Input (never preserve value) -->
+          <div class="relative">
+              <input 
+                  id="login-password" 
+                  type="password" 
+                  name="password" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 peer" 
+                  placeholder=" "
+                  required
+              >
+              <label for="login-password" class="absolute left-4 top-3 text-gray-500 text-sm transition-all duration-200 
+                                                  peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
+                                                  peer-focus:text-sm peer-focus:text-gray-600 
+                                                  peer-focus:-top-2 peer-focus:left-3 
+                                                  peer-focus:bg-white peer-focus:px-1
+                                                  peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-3 
+                                                  peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white 
+                                                  peer-[:not(:placeholder-shown)]:px-1">
+                  Password
+              </label>
+          </div>
+      
+          <!-- Remember Me -->
+          <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                  <input 
+                      id="remember-me" 
+                      type="checkbox" 
+                      name="remember_me" 
+                      class="h-4 w-4 text-gray-900 focus:ring-gray-900 border-gray-300 rounded"
+                      {% if form_data.remember_me %}checked{% endif %}
+                  >
+                  <label for="remember-me" class="ml-2 block text-sm text-gray-600">
+                      Remember me
+                  </label>
+              </div>
+              <div class="text-sm">
+                  <a href="#" class="text-gray-900 font-medium hover:underline">
+                      Forgot password?
+                  </a>
+              </div>
+          </div>
+      
           <!-- Submit Button -->
           <button type="submit" class="w-full py-2 px-4 bg-gray-900 text-white font-medium rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-200">
-            Sign in
+              Sign in
           </button>
         </form>
+      
+      <!-- Display messages -->
+      {% if messages %}
+      <div class="mt-4">
+          {% for message in messages %}
+          <div class="p-3 text-sm text-center rounded-md {% if message.tags == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+              {{ message }}
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
 
         <!-- Registration Link -->
         <div class="mt-6 text-center text-sm text-gray-500">
