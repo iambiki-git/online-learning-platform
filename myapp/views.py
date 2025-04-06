@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from .models import *
 
 # Create your views here.
 
@@ -162,11 +163,39 @@ def courses_view(request):
     if not request.user.is_authenticated:
         return redirect('login')
     
-    return render(request, 'myapp/courses.html')
+    # Fetch courses from the database
+    courses = Course.objects.all()
+    # Check if there are any courses
+    if not courses:
+        messages.info(request, 'No courses available at the moment.')
+        return render(request, 'myapp/courses.html')
+    
+    # Pass the courses to the template
+    content = {
+        'courses':courses,
+    }
 
-def course_detail_view(request):
-    return render(request, 'myapp/course_detail.html')
+         
+    return render(request, 'myapp/courses.html', content)
+
+def course_detail_view(request, course_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    try:
+        course = Course.objects.get(id=course_id)
+    except Course.DoesNotExist:
+        messages.error(request, 'Course not found')
+        return redirect('courses')
+    
+    context = {
+        'course': course,
+    }
+    return render(request, 'myapp/course_detail.html', context)
 
 
 def lesson_page_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
     return render(request, 'myapp/lesson_page.html')
