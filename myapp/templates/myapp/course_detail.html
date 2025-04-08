@@ -22,7 +22,7 @@
               Free Course
             </span>
             <h1 class="text-3xl font-light text-gray-900">{{ course.course_title }}</h1>
-            <p class="mt-2 text-gray-600">{{ course.course_description }}</p>
+            <p class="mt-2 text-gray-600">{{ course.course_detail.course_description }}</p>
           </div>
           
           <div class="flex items-center space-x-4">
@@ -41,11 +41,15 @@
             </div>
           </div>
           
+       
+
+          
           <div class="pt-4">
-            <a href="{% url 'lesson_page' %}" class="px-10 py-3 border border-gray-900 text-gray-900 font-medium hover:bg-gray-900 hover:text-white transition-colors duration-200">
+            <a href="{% url 'lesson_page' course.id %}" class="px-10 py-3 border border-gray-900 text-gray-900 font-medium hover:bg-gray-900 hover:text-white transition-colors duration-200">
               Start Learning
             </a>
           </div>
+          
 
         </div>
         
@@ -62,7 +66,7 @@
         <div class="mb-12">
           <h2 class="text-2xl font-light text-gray-900 mb-6">About This Course</h2>
           <div class="prose max-w-none text-gray-600">
-            <p>{{ course.about_couse }}</p>
+            <p>{{ course.course_detail.about_couse }}</p>
             {% comment %} <p>You'll progress from basic Python programming to advanced data analysis techniques through well-structured written content.</p> {% endcomment %}
           </div>
         </div>
@@ -184,7 +188,7 @@
           </div>
           
           <div class="mt-8">
-            <a href="{% url 'lesson_page' %}" class="px-20 ml-4 py-3 border border-gray-900 text-gray-900 font-medium hover:bg-gray-900 hover:text-white transition-colors duration-200">
+            <a href="{% url 'lesson_page' course.id %}" class="px-20 ml-4 py-3 border border-gray-900 text-gray-900 font-medium hover:bg-gray-900 hover:text-white transition-colors duration-200">
               Start Learning
             </a>
           </div>

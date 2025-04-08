@@ -194,8 +194,37 @@ def course_detail_view(request, course_id):
     return render(request, 'myapp/course_detail.html', context)
 
 
-def lesson_page_view(request):
+def lesson_page_view(request, course_id):
     if not request.user.is_authenticated:
         return redirect('login')
     
-    return render(request, 'myapp/lesson_page.html')
+   
+    course = Course.objects.get(id=course_id)
+    chapters = course.chapters.filter(course=course)  # Fetch chapters related to the course
+
+    #features 
+    features = []
+    for chapter in chapters:
+        chapter_detail = ChapterDetail.objects.filter(chapter=chapter).first()
+        if chapter_detail:
+            features.append({
+                'chapter': chapter,
+                'features': chapter_detail.features,
+                'advantages': chapter_detail.advantages,
+                'disadvantages': chapter_detail.disadvantages,
+            })
+    
+
+    # Process the features to split comma-separated string into lists
+    for feature in features:
+        feature['features'] = feature['features'].split(',') if feature['features'] else []
+
+
+
+    context = {
+        'course': course,
+        'chapters': chapters,
+        'features': features,
+    }
+
+    return render(request, 'myapp/lesson_page.html', context)
