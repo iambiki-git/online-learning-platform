@@ -37,10 +37,7 @@ class Chapter(models.Model):
     
 class ChapterDetail(models.Model):
     chapter = models.OneToOneField(Chapter, related_name='chapter_detail', on_delete=models.CASCADE)
-    definition = models.TextField(blank=True, null=True)
-    features = models.TextField(blank=True, null=True)
-    advantages = models.TextField(blank=True, null=True)
-    disadvantages = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     example_image = models.ImageField(upload_to='example_images/', blank=True, null=True)
 
 

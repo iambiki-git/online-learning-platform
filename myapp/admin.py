@@ -20,7 +20,7 @@ class CourseDetailAdmin(admin.ModelAdmin):
 
 @admin.register(Chapter)
 class ChapterAdmin(admin.ModelAdmin):
-    list_display = ('chapter_title', 'course', 'chapter_upload_date')
+    list_display = ('id', 'chapter_title', 'course', 'chapter_upload_date')
     search_fields = ('chapter_title', 'course__course_title')
     list_filter = ('course',)
     ordering = ('-chapter_upload_date',)
@@ -28,7 +28,7 @@ class ChapterAdmin(admin.ModelAdmin):
 
 @admin.register(ChapterDetail)
 class ChapterDetailAdmin(admin.ModelAdmin):
-    list_display = ('chapter', 'features', 'advantages', 'disadvantages')
+    list_display = ('chapter', 'description', 'example_image')
     search_fields = ('chapter__chapter_title',)
     list_filter = ('chapter',)
     ordering = ('-chapter__chapter_upload_date',)

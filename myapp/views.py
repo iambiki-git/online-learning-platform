@@ -193,38 +193,51 @@ def course_detail_view(request, course_id):
     }
     return render(request, 'myapp/course_detail.html', context)
 
-
+import markdown
 def lesson_page_view(request, course_id):
     if not request.user.is_authenticated:
         return redirect('login')
     
    
     course = Course.objects.get(id=course_id)
-    chapters = course.chapters.filter(course=course)  # Fetch chapters related to the course
-
-    #features 
-    features = []
-    for chapter in chapters:
-        chapter_detail = ChapterDetail.objects.filter(chapter=chapter).first()
-        if chapter_detail:
-            features.append({
-                'chapter': chapter,
-                'features': chapter_detail.features,
-                'advantages': chapter_detail.advantages,
-                'disadvantages': chapter_detail.disadvantages,
-            })
-    
-
-    # Process the features to split comma-separated string into lists
-    for feature in features:
-        feature['features'] = feature['features'].split(',') if feature['features'] else []
-
-
+    chapters = course.chapters.filter(course=course)  # Fetch chapters related to the course    
 
     context = {
         'course': course,
         'chapters': chapters,
-        'features': features,
     }
 
     return render(request, 'myapp/lesson_page.html', context)
+
+
+
+from django.http import JsonResponse
+from .models import Chapter
+
+def get_chapter_content(request, chapter_id):
+    try:
+        chapter = Chapter.objects.get(id=chapter_id)
+        content = chapter.chapter_detail.description  # Assuming you have a `content` field in the `Chapter` model
+        chapter_title = chapter.chapter_title  # Get the chapter title
+
+        previous_chapter = Chapter.objects.filter(id__lt=chapter_id).order_by('-id').first()
+        next_chapter = Chapter.objects.filter(id__gt=chapter_id).order_by('id').first()       
+
+
+        # Convert Markdown to HTML
+        description_html = markdown.markdown(content, extensions=['fenced_code', 'codehilite', 'nl2br'])
+        
+        # If you're receiving raw text, convert \n to <br> or wrap in <p> tags
+        description = description_html.replace('\r\n', '<br>').replace('\n', '<br>')
+
+        return JsonResponse({
+            'content': description, 
+            'title': chapter_title,
+            'previous_chapter_id': previous_chapter.id if previous_chapter else None,
+            'next_chapter_id': next_chapter.id if next_chapter else None,
+            
+
+            
+            })
+    except Chapter.DoesNotExist:
+        return JsonResponse({'error': 'Chapter not found'}, status=404)

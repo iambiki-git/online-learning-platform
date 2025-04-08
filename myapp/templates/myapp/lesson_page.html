@@ -9,88 +9,41 @@
     </div>
     <nav class="px-3 space-y-1">
       {% for chapter in chapters %}
-      <a href="#" class="flex items-center px-3 py-2.5 bg-blue-50 text-blue-600 rounded-lg group transition-all">
-        <span class="text-sm font-medium">{{ forloop.counter }}. {{ chapter.chapter_title }}</span>
-        <span class="ml-auto w-2 h-2 bg-blue-500 rounded-full"></span>
-      </a>
+      <div class="flex items-center justify-between cursor-pointer px-3 py-2.5 bg-blue-50 text-blue-600 rounded-lg group transition-all"
+          data-chapter-id="{{ chapter.id }}"
+          onclick="loadChapterContent({{ chapter.id }})"
+          id="chapter-{{ chapter.id }}">
+          <span class="text-sm font-medium">{{ forloop.counter }}. {{ chapter.chapter_title }}</span>
+          <span class="dot hidden ml-auto w-2 h-2 bg-blue-500 rounded-full"></span>
+      </div>
       {% endfor %}
     </nav>
   </div>
 
   <!-- Main content area - Better spacing and typography -->
-  <div class="flex-1 overflow-y-auto">
-    <div class="max-w-6xl mx-auto p-8 pb-16">
-      {% for chapter in chapters %}
-      <!-- Current chapter header - More refined -->
-      <div class="mb-10">
-        <div class="flex items-center mb-3">
-          <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">Chapter {{ forloop.counter }}</span>
-          <span class="mx-2 text-gray-400">•</span>
-          <span class="text-xs text-gray-500">15 min read</span>
-        </div>
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">{{ chapter.chapter_title }}</h1>
-        <div class="flex items-center text-sm text-gray-500">
-          <div class="flex items-center">
-            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>3/7 exercises completed</span>
+
+
+      <div class="flex-1 p-10 overflow-y-auto">
+        <h2 id="chapter-title" class="text-start px-4 text-xl font-bold text-gray-800">
+          <!-- Initially display a placeholder for the title -->
+          Loading Chapter Title...
+        </h2>
+
+        <!-- Content Area to load chapter content -->
+        <div id="chapter-content" class="p-5">
+          <!-- Initially display the content of the first chapter -->
+          <div id="initial-chapter-content" class="prose max-w-full prose-blue prose-lg text-justify">
+            <p>Loading first chapter...</p>
           </div>
         </div>
-      </div>
 
-      <!-- Lesson content - Improved readability -->
-      <div class="prose prose-sm sm:prose max-w-none mb-12">
-        <h2 class="text-xl font-semibold text-gray-800 mb-5 pb-2 border-b border-gray-100">What is {{ course.course_title }} ?</h2>
-        
-        <p class="mb-5 text-gray-700 leading-relaxed">{{ chapter.chapter_detail.definition }}</p>
-        
-        <div class="bg-gray-50 p-5 rounded-xl border border-gray-200 mb-7">
-          <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
-            <svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-            Key Features
-          </h3>
-          <ul class="space-y-2.5 pl-1">
-            {% for feature in features %}
-                {% for f in feature.features %}
-                    <li class="flex items-start">
-                        <svg class="w-4 h-4 mt-0.5 mr-2 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="text-gray-700">{{ f }}</span>
-                    </li>
-                {% endfor %}
-            {% endfor %}
-          </ul>
-        </div>
-        
-        <!-- Code block with better styling -->
-        <div class="mt-8 mb-10">
-          <div class="flex items-center justify-between bg-gray-800 px-4 py-2 rounded-t-lg">
-            <span class="text-xs font-mono text-gray-300">example.py</span>
-            <button class="text-gray-400 hover:text-white">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
-              </svg>
-            </button>
-          </div>
-          <pre class="bg-gray-900 p-4 rounded-b-lg overflow-x-auto"><code class="text-sm font-mono text-gray-300"># Simple Python program
-            print("Hello, World!")
+    
+      
 
-            def greet(name):
-                """Greets the user with their name"""
-                print(f"Hello, {name}")
-
-            greet("Alice")</code></pre>
-        </div>
-      </div>
-
-      {% endfor %}
+     
 
       <!-- Navigation - More polished buttons -->
-      <div class="flex justify-between border-t border-gray-200 pt-10">
+      {% comment %} <div class="flex justify-between border-t border-gray-200 pt-10">
         <button class="inline-flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all">
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -104,8 +57,142 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
         </a>
+      </div>  {% endcomment %}
+
+      <div class="flex justify-between border-t border-gray-200 pt-10">
+        <!-- Previous Lesson Button -->
+        <button id="previous-chapter" class="inline-flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all" disabled>
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Previous Lesson
+        </button>
+      
+        <!-- Next Lesson Button -->
+        <a id="next-chapter" href="#" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all">
+          Next: <span id="next-chapter-title">Loading...</span>
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
       </div>
+      
+
+      
+      
     </div>
   </div>
 </div>
+
+<script>
+  // Clear all current dots
+  document.querySelectorAll('.dot').forEach(dot => dot.classList.add('hidden'));
+
+  // Remove highlight classes from all chapters
+  document.querySelectorAll('[id^="chapter-"]').forEach(chap => {
+      chap.classList.remove('bg-blue-100', 'text-blue-600');
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const chapters = document.querySelectorAll('.cursor-pointer'); // All chapter list items
+    const prevButton = document.getElementById('previous-chapter');
+    const nextButton = document.getElementById('next-chapter');
+    const contentArea = document.getElementById('chapter-content');
+    const titleElement = document.getElementById('chapter-title');
+
+    
+
+    // Function to load chapter content
+    function loadChapterContent(chapterId) {
+      // Save the current chapter to localStorage for persistence
+      localStorage.setItem('currentChapterId', chapterId);
+  
+      fetch(`/get-chapter-content/${chapterId}/`)
+          .then(response => response.json())
+          .then(data => {
+              // Update the chapter title and content
+              titleElement.textContent = data.title;
+              contentArea.innerHTML = data.content;
+  
+              // 🔵 Clear all current dots
+              document.querySelectorAll('.dot').forEach(dot => dot.classList.add('hidden'));
+  
+              // Remove highlight from all chapters
+              document.querySelectorAll('[id^="chapter-"]').forEach(chap => {
+                  chap.classList.remove('bg-blue-100', 'text-blue-600');
+              });
+  
+              // ✅ Show the dot for the active chapter
+              const activeDot = document.querySelector(`#chapter-${chapterId} .dot`);
+              if (activeDot) {
+                  activeDot.classList.remove('hidden');
+              }
+  
+              // ✅ Highlight the selected chapter
+              const activeChapter = document.getElementById(`chapter-${chapterId}`);
+              if (activeChapter) {
+                  activeChapter.classList.add('bg-blue-100', 'text-blue-600');
+              }
+  
+              // ✅ Update the next button title text
+              document.getElementById('next-chapter-title').textContent = data.next_chapter_title || "No More Chapters";
+  
+              // ✅ Update nav buttons
+              updateNavigationButtons(chapterId);
+          })
+          .catch(error => {
+              console.error('Error loading chapter content:', error);
+          });
+  }
+  
+
+    // Function to update the navigation buttons (Previous and Next)
+    function updateNavigationButtons(currentChapterId) {
+      const currentChapterIndex = Array.from(chapters).findIndex(
+          chapter => chapter.dataset.chapterId == currentChapterId
+      );
+  
+      const previousChapter = chapters[currentChapterIndex - 1];
+      const nextChapter = chapters[currentChapterIndex + 1];
+  
+      // Update Previous button
+      if (previousChapter) {
+          prevButton.disabled = false;
+          prevButton.onclick = () => loadChapterContent(previousChapter.dataset.chapterId);
+      } else {
+          prevButton.disabled = true;
+      }
+  
+      // Update Next button
+      if (nextChapter) {
+          nextButton.disabled = false;
+          nextButton.onclick = () => loadChapterContent(nextChapter.dataset.chapterId);
+          document.getElementById('next-chapter-title').textContent =
+              nextChapter.querySelector('span').textContent;
+      } else {
+          nextButton.disabled = true;
+          document.getElementById('next-chapter-title').textContent = "No More Chapters";
+      }
+  }
+  
+
+    // Attach event listeners to the chapters on the left side
+    chapters.forEach(chapter => {
+        chapter.addEventListener('click', function () {
+            const chapterId = chapter.dataset.chapterId;
+            loadChapterContent(chapterId);
+        });
+    });
+
+    // Optional: If a chapter is stored in localStorage, load that chapter
+    const storedChapterId = localStorage.getItem('currentChapterId');
+    if (storedChapterId) {
+        loadChapterContent(storedChapterId);
+    } else {
+        // Optionally, load the content for the first chapter initially
+        loadChapterContent(chapters[0].dataset.chapterId);
+    }
+});
+
+</script>
 {% endblock %}

@@ -38,12 +38,12 @@
   
           {% if request.user.is_authenticated %}
           <a href="/logout" class="px-8 py-[7px] text-sm border border-gray-900 text-white font-medium bg-gray-900 hover:bg-white hover:text-black transition-colors duration-200 rounded-sm">
-            Sign Out
+            Logout
           </a>
           {% else %}
           <!-- Register CTA -->
-          <a href="/register" class="px-8 py-[7px] text-sm border border-gray-900 text-white font-medium bg-gray-900 hover:bg-white hover:text-black transition-colors duration-200 rounded-sm">
-            Sign Up
+          <a href="/login" class="px-8 py-[7px] text-sm border border-gray-900 text-white font-medium bg-gray-900 hover:bg-white hover:text-black transition-colors duration-200 rounded-sm">
+            Login
           </a>
           {% endif %}
         </div>
