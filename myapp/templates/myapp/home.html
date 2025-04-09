@@ -1,24 +1,71 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="min-h-screen bg-white">
+<div class="min-h-screen py-14 bg-white">
   <!-- Hero Section -->
-  <section class="pt-28 pb-20 px-6 max-w-4xl mx-auto">
-    <div class="text-center space-y-6">
-      <h1 class="text-4xl md:text-5xl font-light text-gray-900 leading-tight">
-        Learn <span class="font-medium">smarter,</span><br>
-        not <span class="font-medium">harder</span>
-      </h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        Quality education from world-class instructors. 
-        No distractions, just learning.
-      </p>
-      <div class="pt-4">
-        <a href="/courses" class="inline-block px-8 py-3 border border-gray-900 text-gray-900 font-medium hover:bg-gray-900 hover:text-white transition-all duration-200">
-          Browse Courses
-        </a>
+  <section class="relative pt-14 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <!-- Vertical rhythm spacer -->
+      <div class="mb-20"></div>
+  
+      <!-- Centered content with optical alignment -->
+      <div class="text-center">
+        <!-- Serif headline for elegance -->
+        <h1 class="text-4xl md:text-5xl font-serif font-normal text-gray-900 leading-tight mb-8 tracking-tight">
+          <span class="block">The Intelligent</span>
+          <span class="block">Approach to Learning</span>
+        </h1>
+        
+        <!-- Tight paragraph with small caps -->
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed tracking-normal">
+          <span class="font-medium small-caps">Curated knowledge</span> from industry leaders, 
+          <span class="font-medium small-caps">structured</span> for measurable progress.
+        </p>
+        
+        <!-- Paired buttons with subtle hierarchy -->
+        <div class="flex flex-col sm:flex-row justify-center gap-3 mb-24 md:mb-10">
+          <a href="/courses" class="
+            inline-flex items-center justify-center px-8 py-3
+            border border-gray-900 text-gray-900 font-medium rounded-none
+            hover:bg-gray-50 transition-all duration-150
+            group
+          ">
+            <span>View Curriculum</span>
+            <span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+          </a>
+          <a href="/methods" class="
+            inline-flex items-center justify-center px-8 py-3
+            border border-transparent text-gray-600 font-medium rounded-none
+            hover:border-gray-300 transition-all duration-150
+          ">
+            Our Methodology
+          </a>
+        </div>
       </div>
+  
+      <!-- Discrete trust indicators -->
+      <div class="flex flex-col items-center border-t border-gray-100 md:pt-6 mb-4">
+        <div class="flex flex-col sm:flex-row items-center gap-8 text-sm text-gray-500">
+          <div class="flex items-center">
+            <div class="flex mr-3">
+              <span class="inline-block w-6 h-6 rounded-full bg-gray-200 border border-white"></span>
+            </div>
+            <span>Trusted by 10,000+ professionals</span>
+          </div>
+          <div class="hidden sm:block h-4 w-px bg-gray-200"></div>
+          <div class="flex items-center">
+            <span>Featured in</span>
+            <span class="ml-2 font-medium text-gray-700">Forbes</span>
+            <span class="mx-1">·</span>
+            <span class="font-medium text-gray-700">WSJ</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Subtle decorative line -->
+      <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-px bg-gray-200"></div>
     </div>
   </section>
+  
 
   <!-- Featured Courses -->
   <section class="py-20 px-6 max-w-6xl mx-auto">

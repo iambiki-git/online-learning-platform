@@ -158,13 +158,15 @@ def logout_view(request):
     
     
 
-
+from django.db.models import Count
 def courses_view(request):
     if not request.user.is_authenticated:
         return redirect('login')
     
-    # Fetch courses from the database
-    courses = Course.objects.all()
+    # Fetch courses and annotate with chapter count
+    courses = Course.objects.annotate(chapter_count=Count('chapters'))
+
+    
     # Check if there are any courses
     if not courses:
         messages.info(request, 'No courses available at the moment.')
@@ -175,8 +177,9 @@ def courses_view(request):
         'courses':courses,
     }
 
-         
     return render(request, 'myapp/courses.html', content)
+
+
 
 def course_detail_view(request, course_id):
     if not request.user.is_authenticated:
@@ -184,14 +187,24 @@ def course_detail_view(request, course_id):
     
     try:
         course = Course.objects.get(id=course_id)
+        contributors = course.course_detail.contributors
+        chapters = course.chapters.all()
+        chapter_count = course.chapters.count()
+        course_highlights = course.course_detail.what_you_will_learn.strip().split('\n')
     except Course.DoesNotExist:
         messages.error(request, 'Course not found')
         return redirect('courses')
     
     context = {
         'course': course,
+        'chapters':chapters,
+        'chapter_count':chapter_count,
+        'highlights':course_highlights,
+        'contributors':contributors,
     }
     return render(request, 'myapp/course_detail.html', context)
+
+
 
 import markdown
 def lesson_page_view(request, course_id):

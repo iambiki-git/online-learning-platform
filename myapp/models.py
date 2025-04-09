@@ -24,7 +24,6 @@ class CourseDetail(models.Model):
         return f"Course Detail for {self.course.course_title}" if self.course.course_title else "Course Detail Not Provided"
 
 
-    
 
 class Chapter(models.Model):
     course = models.ForeignKey(Course, related_name='chapters', on_delete=models.CASCADE)

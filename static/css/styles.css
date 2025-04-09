@@ -5,3 +5,10 @@
     font-family: 'Nunito', sans-serif;
 }
 
+.small-caps {
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+  }
+  .font-serif {
+    font-family: 'Georgia', serif;
+  }
