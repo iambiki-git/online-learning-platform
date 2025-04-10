@@ -1,131 +1,149 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="min-h-screen bg-white flex items-center justify-center p-4">
+<div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
   <div class="w-full max-w-md mt-16">
-    <!-- Form Container -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-300">
+    <!-- Form Container with subtle shadow -->
+    <div class="bg-white rounded-xl shadow-sm border border-blue-200 hover:border-blue-300 overflow-hidden">
+      <!-- Decorative header strip -->
+      <div class="h-2 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+      
       <div class="p-8">
-        <!-- Logo & Heading -->
-        <div class="text-center mb-8">
-          <div class="w-12 h-12 bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+        <!-- Logo & Heading with better spacing -->
+        <div class="text-center mb-7">
+          <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center mx-auto mb-5 shadow-sm">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
             </svg>
           </div>
-          <h1 class="text-2xl font-medium text-gray-900 mb-1">Create your account</h1>
-          <p class="text-gray-500 text-sm">Join to access all features</p>
+          <h1 class="text-2xl font-bold text-gray-800 mb-2">Create your account</h1>
+          <p class="text-gray-500">Join our community to unlock all features</p>
         </div>
 
-        <!-- At the top of your template, before the form -->
+        <!-- Messages with better styling -->
         {% if messages %}
-        <div class="message-container">
+        <div class="mb-6 space-y-2">
           {% for message in messages %}
-            <div class="p-1 rounded-sm text-sm text-justify {% if message.tags == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
-              *{{ message }}
+            <div class="p-3 rounded-lg text-sm {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-100{% else %}bg-green-50 text-green-700 border border-green-100{% endif %}">
+              {{ message }}
             </div>
           {% endfor %}
         </div>
         {% endif %}
 
         <!-- Registration Form -->
-        <form class="space-y-6" method="POST">
+        <form class="space-y-5" method="POST">
           {% csrf_token %}
-          <!-- Input Fields with Floating Labels -->
+          
+          <!-- Input Fields with improved floating labels -->
           <div class="relative">
             <input 
               id="name" 
               type="text" 
               name="full_name" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-600 focus:border-gray-600 peer"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 peer transition-all duration-150"
               placeholder=" "
               value="{{ form_data.full_name|default:'' }}"
               required
             >
             <label 
               for="name" 
-              class="absolute left-4 top-3 text-gray-500 text-sm transition-all duration-200 
+              class="absolute left-3 top-3 text-gray-400 text-sm transition-all duration-200 
                      peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
-                     peer-focus:text-sm peer-focus:text-gray-600 
-                     peer-focus:-top-2 peer-focus:left-3 
+                     peer-focus:text-sm peer-focus:text-blue-600 
+                     peer-focus:-top-2 peer-focus:left-2 
                      peer-focus:bg-white peer-focus:px-1
-                     peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-3 
+                     peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-2 
                      peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white 
-                     peer-[:not(:placeholder-shown)]:px-1"
+                     peer-[:not(:placeholder-shown)]:px-1 pointer-events-none"
             >
               Full Name
             </label>
           </div>
-        
+          
           <div class="relative">
             <input 
               id="email" 
               type="email" 
               name="email" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-600 focus:border-gray-600 peer"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 peer transition-all duration-150"
               placeholder=" "
               value="{{ form_data.email|default:'' }}"
               required
             >
             <label 
               for="email" 
-              class="absolute left-4 top-3 text-gray-500 text-sm transition-all duration-200 
+              class="absolute left-3 top-3 text-gray-400 text-sm transition-all duration-200 
                      peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
-                     peer-focus:text-sm peer-focus:text-gray-600 
-                     peer-focus:-top-2 peer-focus:left-3 
+                     peer-focus:text-sm peer-focus:text-blue-600 
+                     peer-focus:-top-2 peer-focus:left-2 
                      peer-focus:bg-white peer-focus:px-1
-                     peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-3 
+                     peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-2 
                      peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white 
-                     peer-[:not(:placeholder-shown)]:px-1"
+                     peer-[:not(:placeholder-shown)]:px-1 pointer-events-none"
             >
-              Email
+              Email Address
             </label>
           </div>
-        
+          
           <div class="relative">
             <input 
               id="password" 
               type="password" 
               name="password" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-600 focus:border-gray-600 peer"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 peer transition-all duration-150"
               placeholder=" "
               required
             >
             <label 
               for="password" 
-              class="absolute left-4 top-3 text-gray-500 text-sm transition-all duration-200 
+              class="absolute left-3 top-3 text-gray-400 text-sm transition-all duration-200 
                      peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
-                     peer-focus:text-sm peer-focus:text-gray-600 
-                     peer-focus:-top-2 peer-focus:left-3 
+                     peer-focus:text-sm peer-focus:text-blue-600 
+                     peer-focus:-top-2 peer-focus:left-2 
                      peer-focus:bg-white peer-focus:px-1
-                     peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-3 
+                     peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-2 
                      peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:bg-white 
-                     peer-[:not(:placeholder-shown)]:px-1"
+                     peer-[:not(:placeholder-shown)]:px-1 pointer-events-none"
             >
               Password
             </label>
+            <button type="button" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600" onclick="togglePasswordVisibility('password')">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </button>
           </div>
-        
-          <!-- Checkbox -->
+          
+          <!-- Checkbox with better alignment -->
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="terms" type="checkbox" name="terms_condition" class="h-4 w-4 text-blue-600 focus:ring-blue-600 border-gray-300 rounded" required>
+              <input id="terms" type="checkbox" name="terms_condition" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
             </div>
             <div class="ml-3 text-sm">
-              <label for="terms" class="text-gray-600">I agree to the <a href="#" class="text-gray-600 font-bold hover:underline">terms</a></label>
+              <label for="terms" class="text-gray-600">I agree to the <a href="#" class="text-blue-600 hover:underline font-medium">Terms of Service</a> and <a href="#" class="text-blue-600 hover:underline font-medium">Privacy Policy</a></label>
             </div>
           </div>
-        
-          <!-- Submit Button -->
-          <button type="submit" class="w-full py-3 px-4 bg-gray-800 text-white font-medium rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 transition-colors duration-200">
-            Register
+          
+          <!-- Submit Button with gradient -->
+          <button type="submit" class="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm">
+            Create Account
           </button>
         </form>
-        <!-- Login Link -->
-        <div class="mt-6 text-center text-sm text-gray-500">
-          Already have an account? <a href="/login" class="text-gray-900 font-medium hover:underline">Sign in</a>
+        
+        <!-- Login Link with better separation -->
+        <div class="pt-2 border-t border-gray-100 text-center text-sm text-gray-500">
+          Already have an account? <a href="/login" class="text-blue-600 font-medium hover:underline">Sign in</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  function togglePasswordVisibility(fieldId) {
+    const field = document.getElementById(fieldId);
+    field.type = field.type === 'password' ? 'text' : 'password';
+  }
+</script>
 {% endblock %}
