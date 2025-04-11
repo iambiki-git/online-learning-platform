@@ -248,9 +248,11 @@ def get_chapter_content(request, chapter_id):
             'title': chapter_title,
             'previous_chapter_id': previous_chapter.id if previous_chapter else None,
             'next_chapter_id': next_chapter.id if next_chapter else None,
-            
-
-            
             })
     except Chapter.DoesNotExist:
         return JsonResponse({'error': 'Chapter not found'}, status=404)
+
+
+
+def user_profile(request):
+    return render(request, 'myapp/user_profile.html')
