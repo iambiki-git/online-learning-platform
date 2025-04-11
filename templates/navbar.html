@@ -37,13 +37,103 @@
           </button>
   
           {% if request.user.is_authenticated %}
-          <a href="/logout" class="px-8 py-[7px] text-sm border border-gray-900 text-white font-medium bg-gray-900 hover:bg-white hover:text-black transition-colors duration-200 rounded-sm">
-            Logout
+          <a href="/logout" class="
+            relative px-8 py-3 
+            inline-flex items-center justify-center
+            text-sm font-medium tracking-wide
+            text-gray-900 hover:text-white
+            transition-[color,background] duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]
+            overflow-hidden
+            group
+            isolate
+          ">
+            <!-- Animated overlay background -->
+            <span class="
+              absolute inset-0 
+              w-0 bg-gradient-to-r from-indigo-600 to-blue-500
+              group-hover:w-full
+              transition-[width] duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]
+              origin-left
+              z-[-1]
+            "></span>
+            
+            <!-- Thin vertical indicator bar -->
+            <span class="
+              absolute left-0 top-0 
+              h-full w-[2px]
+              bg-white
+              transform -translate-x-full 
+              group-hover:translate-x-[200%]
+              transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]
+              opacity-80
+            "></span>
+
+            <!-- Button text with perfect timing -->
+            <span class="relative 
+              transition-colors duration-300 ease-out
+              group-hover:delay-200
+            ">
+              Logout
+              <span class="
+                absolute left-full top-1/2 ml-2
+                -translate-y-1/2
+                opacity-0 group-hover:opacity-100
+                transition-opacity duration-300 ease-out
+                group-hover:delay-300
+              ">
+                →
+              </span>
+            </span>
           </a>
           {% else %}
           <!-- Register CTA -->
-          <a href="/login" class="px-8 py-[7px] text-sm border border-gray-900 text-white font-medium bg-gray-900 hover:bg-white hover:text-black transition-colors duration-200 rounded-sm">
-            Login
+          <a href="/login" class="
+            relative px-8 py-3 
+            inline-flex items-center justify-center
+            text-sm font-medium tracking-wide
+            text-gray-900 hover:text-white
+            transition-[color,background] duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]
+            overflow-hidden
+            group
+            isolate
+          ">
+            <!-- Animated overlay background -->
+            <span class="
+              absolute inset-0 
+              w-0 bg-gradient-to-r from-indigo-600 to-blue-500
+              group-hover:w-full
+              transition-[width] duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]
+              origin-left
+              z-[-1]
+            "></span>
+            
+            <!-- Thin vertical indicator bar -->
+            <span class="
+              absolute left-0 top-0 
+              h-full w-[2px]
+              bg-white
+              transform -translate-x-full 
+              group-hover:translate-x-[200%]
+              transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]
+              opacity-80
+            "></span>
+
+            <!-- Button text with perfect timing -->
+            <span class="relative 
+              transition-colors duration-300 ease-out
+              group-hover:delay-200
+            ">
+              Login
+              <span class="
+                absolute left-full top-1/2 ml-2
+                -translate-y-1/2
+                opacity-0 group-hover:opacity-100
+                transition-opacity duration-300 ease-out
+                group-hover:delay-300
+              ">
+                →
+              </span>
+            </span>
           </a>
           {% endif %}
         </div>
